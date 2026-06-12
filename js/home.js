@@ -22,6 +22,12 @@ function displayProducts(products) {
     for (let i = 0; i < products.length; i++) {
         const product = products[i];
 
+        const productLink = document.createElement('a');
+        productLink.href = `product.html?id=${product.id}`;
+        productLink.className = 'product-link';
+        productLink.style.textDecoration = 'none';
+        productLink.style.color = 'inherit';
+
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
 
@@ -32,7 +38,8 @@ function displayProducts(products) {
             <button class="btn-add-cart">Add to Cart</button>
         `;
 
-        container.appendChild(productCard);
+        productLink.appendChild(productCard);
+        container.appendChild(productLink);
     }
 }
 
