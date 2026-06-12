@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopLite - Shopping Cart</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">ShopLite</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="product.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="register.html">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Shopping Cart</h1>
+        <section class="cart-content">
+            <table border="1" cellpadding="10" cellspacing="0" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Premium Product</td>
+                        <td>$99.99</td>
+                        <td><input type="number" value="1" min="1"></td>
+                        <td>$99.99</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>Total: $99.99</h2>
+            <a href="product.html"><button>Continue Shopping</button></a>
+            <button onclick="checkout()">Checkout</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ShopLite. All rights reserved.</p>
+        <p>Email: info@shoplite.com | Phone: 123-456-7890</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
