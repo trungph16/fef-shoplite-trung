@@ -10,7 +10,11 @@
     <header>
         <nav>
             <a href="index.html" class="logo">ShopLite</a>
-            <ul>
+            <button class="hamburger" id="hamburger-btn">
+                <img class="menu-icon" src="assets/icons/menu.png" alt="Menu">
+                <img class="close-icon" src="assets/icons/close.png" alt="Close">
+            </button>
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="product.html">Products</a></li>
                 <li><a href="cart.html">Cart</a></li>
@@ -23,19 +27,19 @@
         <h1>User Registration</h1>
         <section class="register-form">
             <form action="#" method="post">
-                <div>
+                <div class="form-group">
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" required>
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="confirm-password">Confirm Password:</label>
                     <input type="password" id="confirm-password" name="confirm-password" required>
                 </div>
@@ -49,6 +53,7 @@
         <p>Email: info@shoplite.com | Phone: 123-456-7890</p>
     </footer>
 
+    <script src="js/menu.js"></script>
     <script src="js/register.js"></script>
 </body>
 </html>

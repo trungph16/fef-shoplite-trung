@@ -19,6 +19,9 @@ header {
   color: white;
   padding: 0;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 nav {
@@ -29,6 +32,7 @@ nav {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  position: relative;
 }
 
 .logo {
@@ -36,6 +40,7 @@ nav {
   font-weight: bold;
   text-decoration: none;
   color: white;
+  z-index: 101;
 }
 
 nav ul {
@@ -52,6 +57,45 @@ nav a {
 
 nav a:hover {
   color: #3498db;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  gap: 5px;
+  z-index: 102;
+}
+
+.hamburger img {
+  width: 25px;
+  height: 25px;
+    brightness: 100%;
+  transition: opacity 0.3s ease;
+}
+
+.menu-icon {
+  display: block;
+}
+
+.close-icon {
+  display: none;
+}
+
+.hamburger.active .menu-icon {
+  display: none;
+}
+
+.hamburger.active .close-icon {
+  display: block;
+}
+
+.nav-menu {
+  display: flex;
 }
 
 /* Main Content */
@@ -94,7 +138,7 @@ button {
 }
 
 button:hover {
-  background-color: #2980b9;
+  /* background-color: #2980b9; */
 }
 
 /* Products Grid Layout */
@@ -182,6 +226,170 @@ button:hover {
   background-color: #229954;
 }
 
+/* Form Styling */
+.register-form {
+  max-width: 500px;
+  margin: 2rem auto;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.75rem;
+  border: 1px solid #bdc3c7;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+/* Product Detail Page Styling */
+.product-detail-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.product-detail-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-detail-image img {
+  max-width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+}
+
+.product-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.product-detail-info h2 {
+  font-size: 1.75rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.product-category {
+  padding: 0;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  text-transform: uppercase;
+}
+
+.product-rating {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.product-rating p {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.product-description {
+  border-top: 1px solid #ecf0f1;
+  padding-top: 1rem;
+}
+
+.product-description h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.product-description p {
+  color: #555;
+  line-height: 1.6;
+}
+
+.btn-back {
+  background-color: #95a5a6;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.btn-back:hover {
+  background-color: #7f8c8d;
+}
+
+/* Cart Page Styling */
+.cart-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.cart-content table {
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.cart-content th,
+.cart-content td {
+  padding: 1rem;
+  text-align: left;
+  border: 1px solid #ecf0f1;
+}
+
+.cart-content th {
+  background-color: #2c3e50;
+  color: white;
+  font-weight: 600;
+}
+
+.cart-content tr:hover {
+  background-color: #f9f9f9;
+}
+
+.cart-content h2 {
+  margin: 2rem 0 1rem;
+  color: #2c3e50;
+}
+
+.cart-content button,
+.cart-content a button {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .products-grid {
@@ -191,5 +399,277 @@ button:hover {
 
   main {
     padding: 1rem;
+  }
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 576px) {
+  /* Header and Navigation */
+  nav {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem;
+    gap: 0;
+    position: relative;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+    margin-bottom: 0;
+  }
+
+  .hamburger {
+    display: flex;
+    order: 2;
+    margin-left: auto;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 60%;
+    max-width: 300px;
+    height: 100vh;
+    background-color: #2c3e50;
+    flex-direction: column;
+    gap: 0;
+    padding: 6rem 1rem 1rem;
+    transform: translateX(100%);
+    transition: transform 0.3s;
+    z-index: 99;
+    overflow-y: auto;
+  }
+
+  .nav-menu.active {
+    transform: translateX(0);
+  }
+
+  .nav-menu::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .nav-menu.active::before {
+    opacity: 1;
+    z-index: 98;
+    pointer-events: auto;
+  }
+
+  .nav-menu li, .nav-menu a {
+    position: relative;
+    z-index: 100;
+    pointer-events: auto;
+  }
+
+  nav ul li {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  nav a {
+    display: block;
+    padding: 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    text-align: left;
+  }
+
+  nav a:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: white;
+  }
+
+  /* Main Content */
+  main {
+    padding: 1rem;
+    margin: 0;
+  }
+
+  main h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Products Grid - 2 columns on small screens */
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .product-image {
+    height: 150px;
+  }
+
+  .product-title {
+    font-size: 0.9rem;
+    padding: 0.75rem 0.75rem 0.25rem;
+  }
+
+  .product-price {
+    padding: 0.25rem 0.75rem;
+    font-size: 1rem;
+  }
+
+  .btn-add-cart {
+    margin: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  /* Product Detail Page */
+  .product-detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .product-detail-image {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .product-detail-image img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+  }
+
+  .product-detail-info {
+    width: 100%;
+  }
+
+  .product-detail-info h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-detail-info h3 {
+    font-size: 1rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .product-detail-info p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .product-detail-info .btn-add-cart {
+    width: 100%;
+    margin: 1rem 0 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .product-detail-info a {
+    width: 100%;
+  }
+
+  .product-detail-info a .btn-back {
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin: 0;
+  }
+
+  /* Form Styling for Mobile */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+  }
+
+  form button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  /* Cart Page Mobile */
+  .cart-content {
+    padding: 1rem;
+  }
+
+  .cart-content table {
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cart-content th,
+  .cart-content td {
+    padding: 0.75rem;
+  }
+
+  .cart-content button,
+  .cart-content a button {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .cart-content h2 {
+    font-size: 1.25rem;
+  }
+
+  /* Footer */
+  footer {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  footer p {
+    margin: 0.25rem 0;
+  }
+
+  /* Prevent horizontal scrollbar */
+  html,
+  body {
+    max-width: 100%;
+    //overflow-x: hidden;
+  }
+
+  /* Single column for very small screens (under 400px) */
+  @media (max-width: 400px) {
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+
+    nav ul {
+      gap: 0.25rem;
+    }
+
+    .product-image {
+      height: 120px;
+    }
   }
 }
