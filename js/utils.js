@@ -4,11 +4,6 @@ function getCart() {
     return cartData ? JSON.parse(cartData) : [];
 }
 
-// Lưu dữ liệu giỏ hàng xuống localStorage
-function saveCart(cart) {
-    localStorage.setItem('cart', JSON.stringify(cart));
-}
-
 // Định dạng tiền tệ
 function formatMoney(amount) {
     return `$${amount.toFixed(2)}`;
@@ -38,3 +33,33 @@ function hideLoading(element) {
         element.style.display = 'none';
     }
 }
+
+
+function saveCart(cart) {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartBadge(); 
+}
+
+function updateCartBadge() {
+    const cart = getCart();
+    
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    
+    const badge = document.getElementById('cart-badge');
+    if (badge) {
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'inline-block' : 'none';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', updateCartBadge);
+
+window.addEventListener('storage', function(event) {
+    if (event.key === 'cart') {
+        updateCartBadge();
+  
+        if (typeof renderCart === 'function') {
+            renderCart();
+        }
+    }
+});
