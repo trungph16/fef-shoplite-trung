@@ -782,3 +782,153 @@ button:hover {
     }
   }
 }
+
+
+/* ==========================================================================
+   ADVANCED UX: SKELETON LOADING & TOAST NOTIFICATION
+   ========================================================================== */
+
+/* 1. Hiệu ứng Shimmer (Dải sáng quét qua) */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: 4px;
+}
+
+/* Khung xương cho thẻ sản phẩm ở Trang Chủ */
+.skeleton-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.skeleton-img { height: 200px; width: 100%; border-radius: 6px; }
+.skeleton-title { height: 18px; width: 85%; }
+.skeleton-text { height: 14px; width: 40%; }
+.skeleton-price { height: 22px; width: 50%; }
+.skeleton-btn { height: 40px; width: 100%; margin-top: auto; border-radius: 4px; }
+
+
+/* 2. Khung chứa danh sách các Toast ở góc màn hình */
+#toast-container {
+    position: fixed;
+    top: 80px; /* Cách dưới Navbar một khoảng vừa phải */
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Thẻ thông báo Toast đơn lẻ */
+.toast {
+    background-color: white;
+    color: #2c3e50;
+    padding: 12px 24px;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-left: 5px solid #27ae60; /* Mặc định màu xanh lá (success) */
+    transform: translateX(120%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+}
+
+/* Trạng thái hiển thị trượt vào */
+.toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Phân loại màu theo trạng thái thông báo */
+.toast.success { border-left-color: #27ae60; }
+.toast.error { border-left-color: #e74c3c; }
+.toast.info { border-left-color: #3498db; }
+
+
+/* ==========================================================================
+   CUSTOM CONFIRM MODAL (BẢNG XÁC NHẬN TÙY CHỈNH)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-title {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-modal-cancel {
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-modal-cancel:hover { background-color: #7f8c8d; }
+
+.btn-modal-confirm {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-modal-confirm:hover { background-color: #c0392b; }

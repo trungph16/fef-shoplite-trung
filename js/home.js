@@ -1,36 +1,28 @@
 let allProducts = [];
 
 async function loadProducts() {
-    const loadingIndicator = document.getElementById('loading-indicator');
     const container = document.getElementById('products-container');
 
     try {
-        showLoading(loadingIndicator);
-        container.innerHTML = '';
+        showProductSkeletons(container, 8); 
 
         const res = await fetch('https://fakestoreapi.com/products');
-
-        if (!res.ok) {
-            throw new Error(`Network error: ${res.status} ${res.statusText}`);
-        }
+        if (!res.ok) throw new Error(`Network error: ${res.status}`);
 
         const products = await res.json();
         allProducts = products;
-        displayProducts(products);
-        hideLoading(loadingIndicator);
+        
+        displayProducts(products); 
     } catch (error) {
-        console.error('Error fetching products:', error);
-        showError(loadingIndicator, 'Lỗi kết nối máy chủ, vui lòng thử lại sau.');
+        showToast('Lỗi tải sản phẩm, vui lòng thử lại sau.', 'error');
+        container.innerHTML = `<p style="color: #e74c3c; text-align: center; padding: 2rem; width: 100%;">Lỗi kết nối máy chủ, vui lòng thử lại sau.</p>`;
     }
 }
 
 async function loadCategories() {
     const categoryContainer = document.getElementById('category-filter');
-    const loadingIndicator = document.getElementById('loading-indicator');
 
     try {
-        showLoading(loadingIndicator);
-
         const res = await fetch('https://fakestoreapi.com/products/categories');
 
         if (!res.ok) {
@@ -63,12 +55,8 @@ async function loadCategories() {
 
             categoryContainer.appendChild(btn);
         });
-
-        hideLoading(loadingIndicator);
-
     } catch (error) {
-        console.error('Error loading categories:', error);
-        showError(loadingIndicator, 'Lỗi kết nối máy chủ, vui lòng thử lại sau.');
+        showToast('Lỗi tải danh mục, vui lòng thử lại sau.', 'error');
     }
 }
 
@@ -149,10 +137,10 @@ function addToCart(product) {
     }
 
     saveCart(cart);
-    alert(`${product.title} đã được thêm vào giỏ hàng!`);
+    showToast(`Đã thêm thành công món hàng vào giỏ!`, 'success');
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    await loadCategories();
     await loadProducts();
+    await loadCategories();
 });

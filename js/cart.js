@@ -74,11 +74,15 @@ function decreaseQuantity(index) {
 
 function removeItem(index) {
     const cart = getCart();
-    if (confirm(`Bạn có chắc muốn xóa ${cart[index].title}?`)) {
+    const removedItemName = cart[index].title; 
+
+    showConfirmModal(`Bạn có chắc chắn muốn xóa "${removedItemName}" khỏi giỏ hàng?`, () => {
         cart.splice(index, 1);
         saveCart(cart);
         renderCart();
-    }
+        
+        showToast(`Đã xóa ${removedItemName} khỏi giỏ hàng!`, 'info');  
+    });
 }
 
 function calculateTotal() {
@@ -93,11 +97,17 @@ function calculateTotal() {
 function checkout() {
     const cart = getCart();
     if (cart.length === 0) {
-        alert('Giỏ hàng trống!');
+        showToast(`Giỏ hàng trống!`, 'info');
         return;
     }
+    
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    alert(`Tổng tiền: ${formatMoney(total)}. Cảm ơn bạn đã mua sắm!`);
+    
+    showToast(`Thanh toán thành công ${formatMoney(total)}. Cảm ơn bạn đã mua sắm!`, 'success');
+    
+    saveCart([]);
+    
+    renderCart();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
