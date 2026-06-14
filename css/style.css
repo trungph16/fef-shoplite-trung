@@ -750,6 +750,26 @@ button:hover {
     font-size: 1.25rem;
   }
 
+  .advanced-filters {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%; 
+    box-sizing: border-box;
+  }
+
+  .search-wrapper,
+  .sort-wrapper {
+    width: 50%;
+    box-sizing: border-box;
+  }
+
+
+  #search-input,
+  #sort-select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
   /* Footer */
   footer {
     padding: 1rem;
@@ -932,3 +952,105 @@ button:hover {
 }
 
 .btn-modal-confirm:hover { background-color: #c0392b; }
+
+
+/* ==========================================================================
+   PAGINATION (NEXT / BACK)
+   ========================================================================== */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    width: 100%;
+}
+
+.btn-page {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-page:hover:not(:disabled) {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.btn-page:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.page-info {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #2c3e50;
+    min-width: 100px;
+    text-align: center;
+}
+
+#search-input:focus, #sort-select:focus {
+    border-color: #3498db !important;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+}
+
+/* ==========================================================================
+   ADVANCED FILTERS (TÌM KIẾM & SẮP XẾP)
+   ========================================================================== */
+.advanced-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+}
+
+.search-wrapper {
+    flex: 1; /* Ô tìm kiếm chiếm toàn bộ không gian còn lại */
+}
+
+.sort-wrapper {
+    min-width: 220px; /* Độ rộng cố định cho ô sắp xếp trên máy tính */
+}
+
+/* Kiểu dáng chung cho cả 2 ô */
+#search-input,
+#sort-select {
+    width: 100%;
+    /* Chú ý: Padding phải là 2.5rem để chừa chỗ cho mũi tên */
+    padding: 0.75rem 2.5rem 0.75rem 1.25rem; 
+    border: 2px solid #bdc3c7;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: #2c3e50;
+    outline: none;
+    background-color: white;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23bdc3c7%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem top 50%;
+    background-size: 0.65rem auto;
+}
+
+/* Hiệu ứng khi bấm vào */
+#search-input:focus,
+#sort-select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+}

@@ -28,7 +28,22 @@
 
     <main>
         <h1>Welcome to ShopLite</h1>
-        <p>Discover our amazing collection of products.</p>
+        <p style="margin-bottom: 1.5rem;">Discover our amazing collection of products.</p>
+
+        <div class="advanced-filters">
+            <div class="search-wrapper">
+                <input type="text" id="search-input" placeholder="Tìm kiếm tên sản phẩm...">
+            </div>
+            
+            <div class="sort-wrapper">
+                <select id="sort-select">
+                    <option value="default">Sắp xếp: Mặc định</option>
+                    <option value="asc">Giá: Thấp đến Cao</option>
+                    <option value="desc">Giá: Cao đến Thấp</option>
+                </select>
+            </div>
+        </div>
+
         <div class="category-section">
             <h3>Danh mục</h3>
             <div id="category-filter" class="category-filter"></div>
