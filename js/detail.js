@@ -1,4 +1,7 @@
 async function loadProductDetail() {
+    const loadingIndicator = document.getElementById('loading-indicator');
+    const container = document.getElementById('product-detail-container');
+
     try {
         const params = new URLSearchParams(window.location.search);
         const productId = params.get('id');
@@ -6,6 +9,11 @@ async function loadProductDetail() {
         if (!productId) {
             throw new Error('Product ID not found in URL');
         }
+
+        loadingIndicator.style.display = 'block';
+        loadingIndicator.textContent = 'Đang tải dữ liệu...';
+        loadingIndicator.style.color = '#2c3e50';
+        container.innerHTML = '';
 
         const res = await fetch(`https://fakestoreapi.com/products/${productId}`);
 
@@ -15,10 +23,11 @@ async function loadProductDetail() {
 
         const product = await res.json();
         displayProductDetail(product);
+        loadingIndicator.style.display = 'none';
     } catch (error) {
         console.error('Error fetching product detail:', error);
-        const container = document.getElementById('product-detail-container');
-        container.innerHTML = '<p>Lỗi khi tải chi tiết sản phẩm. Vui lòng thử lại.</p>';
+        loadingIndicator.textContent = 'Lỗi kết nối máy chủ, vui lòng thử lại sau.';
+        loadingIndicator.style.color = '#e74c3c';
     }
 }
 
