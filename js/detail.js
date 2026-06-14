@@ -50,11 +50,39 @@ function displayProductDetail(product) {
                     <h3>Mô tả chi tiết:</h3>
                     <p>${product.description}</p>
                 </div>
-                <button class="btn-add-cart">Thêm vào giỏ hàng</button>
+                <button class="btn-add-cart" data-product-id="${product.id}">Thêm vào giỏ hàng</button>
                 <a href="index.html"><button class="btn-back">Quay lại</button></a>
             </div>
         </div>
     `;
+
+    const addCartBtn = container.querySelector('.btn-add-cart');
+    addCartBtn.addEventListener('click', () => addToCart(product));
+}
+
+function addToCart(product) {
+    let cart = getCart();
+    const existingItem = cart.find(item => item.id === product.id);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            image: product.image,
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${product.title} đã được thêm vào giỏ hàng!`);
+}
+
+function getCart() {
+    const cartData = localStorage.getItem('cart');
+    return cartData ? JSON.parse(cartData) : [];
 }
 
 document.addEventListener('DOMContentLoaded', loadProductDetail);

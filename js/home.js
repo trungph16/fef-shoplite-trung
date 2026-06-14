@@ -86,9 +86,28 @@ function displayProducts(products) {
 }
 
 function addToCart(product) {
-    console.log('Thêm sản phẩm vào giỏ hàng:', product);
+    let cart = getCart();
+    const existingItem = cart.find(item => item.id === product.id);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            image: product.image,
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
     alert(`${product.title} đã được thêm vào giỏ hàng!`);
-    // TODO: Implement cart functionality
+}
+
+function getCart() {
+    const cartData = localStorage.getItem('cart');
+    return cartData ? JSON.parse(cartData) : [];
 }
 
 document.addEventListener('DOMContentLoaded', loadProducts);
