@@ -1,12 +1,3 @@
-function getCart() {
-    const cartData = localStorage.getItem('cart');
-    return cartData ? JSON.parse(cartData) : [];
-}
-
-function saveCart(cart) {
-    localStorage.setItem('cart', JSON.stringify(cart));
-}
-
 function renderCart() {
     const cart = getCart();
     const tableBody = document.getElementById('cart-items');
@@ -20,26 +11,47 @@ function renderCart() {
 
     cart.forEach((item, index) => {
         const row = document.createElement('tr');
+        row.dataset.index = index; // Gắn index vào row để biết đang thao tác với sản phẩm nào
         row.innerHTML = `
             <td>
                 <img src="${item.image}" alt="${item.title}" style="width: 80px; height: 80px; object-fit: contain;">
                 <div style="margin-top: 0.5rem;">${item.title}</div>
             </td>
-            <td>$${item.price.toFixed(2)}</td>
+            <td>${formatMoney(item.price)}</td>
             <td>
-                <button class="btn-qty" onclick="decreaseQuantity(${index})">−</button>
+                <button class="btn-qty btn-decrease" data-action="decrease">−</button>
                 <span style="margin: 0 1rem;">${item.quantity}</span>
-                <button class="btn-qty" onclick="increaseQuantity(${index})">+</button>
+                <button class="btn-qty btn-increase" data-action="increase">+</button>
             </td>
-            <td>$${(item.price * item.quantity).toFixed(2)}</td>
+            <td>${formatMoney(item.price * item.quantity)}</td>
             <td>
-                <button class="btn-delete" onclick="removeItem(${index})">Xóa</button>
+                <button class="btn-delete" data-action="delete">Xóa</button>
             </td>
         `;
         tableBody.appendChild(row);
     });
 
     calculateTotal();
+}
+
+// Kỹ thuật Event Delegation (Xử lý mọi click trong giỏ hàng)
+function handleCartAction(event) {
+    const button = event.target.closest('button[data-action]');
+    if (!button) return;
+
+    const row = button.closest('tr');
+    if (!row) return;
+
+    const index = parseInt(row.dataset.index, 10);
+    const action = button.dataset.action;
+
+    if (action === 'increase') {
+        increaseQuantity(index);
+    } else if (action === 'decrease') {
+        decreaseQuantity(index);
+    } else if (action === 'delete') {
+        removeItem(index);
+    }
 }
 
 function increaseQuantity(index) {
@@ -73,7 +85,9 @@ function calculateTotal() {
     const cart = getCart();
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const totalElement = document.getElementById('cart-total');
-    totalElement.textContent = `$${total.toFixed(2)}`;
+    if (totalElement) {
+        totalElement.textContent = formatMoney(total);
+    }
 }
 
 function checkout() {
@@ -82,7 +96,15 @@ function checkout() {
         alert('Giỏ hàng trống!');
         return;
     }
-    alert(`Tổng tiền: $${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)}. Cảm ơn bạn đã mua sắm!`);
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    alert(`Tổng tiền: ${formatMoney(total)}. Cảm ơn bạn đã mua sắm!`);
 }
 
-document.addEventListener('DOMContentLoaded', renderCart);
+document.addEventListener('DOMContentLoaded', () => {
+    renderCart();
+    const cartItems = document.getElementById('cart-items');
+    if (cartItems) {
+        // Gắn 1 listener duy nhất cho toàn bộ danh sách giỏ hàng
+        cartItems.addEventListener('click', handleCartAction);
+    }
+});

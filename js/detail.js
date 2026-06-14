@@ -10,9 +10,7 @@ async function loadProductDetail() {
             throw new Error('Product ID not found in URL');
         }
 
-        loadingIndicator.style.display = 'block';
-        loadingIndicator.textContent = 'Đang tải dữ liệu...';
-        loadingIndicator.style.color = '#2c3e50';
+        showLoading(loadingIndicator);
         container.innerHTML = '';
 
         const res = await fetch(`https://fakestoreapi.com/products/${productId}`);
@@ -23,11 +21,9 @@ async function loadProductDetail() {
 
         const product = await res.json();
         displayProductDetail(product);
-        loadingIndicator.style.display = 'none';
+        hideLoading(loadingIndicator);
     } catch (error) {
-        console.error('Error fetching product detail:', error);
-        loadingIndicator.textContent = 'Lỗi kết nối máy chủ, vui lòng thử lại sau.';
-        loadingIndicator.style.color = '#e74c3c';
+        showError(loadingIndicator, 'Lỗi kết nối máy chủ, vui lòng thử lại sau.');  
     }
 }
 
@@ -42,7 +38,7 @@ function displayProductDetail(product) {
             <div class="product-detail-info">
                 <h2>${product.title}</h2>
                 <p class="product-category">Danh mục: ${product.category}</p>
-                <p class="product-price">Giá: <strong>$${product.price.toFixed(2)}</strong></p>
+                <p class="product-price">Giá: <strong>${formatMoney(product.price)}</strong></p>
                 <div class="product-rating">
                     <p>Đánh giá: ${product.rating ? product.rating.rate + '/5 (' + product.rating.count + ' reviews)' : 'N/A'}</p>
                 </div>
@@ -76,13 +72,8 @@ function addToCart(product) {
         });
     }
 
-    localStorage.setItem('cart', JSON.stringify(cart));
+    saveCart(cart);
     alert(`${product.title} đã được thêm vào giỏ hàng!`);
-}
-
-function getCart() {
-    const cartData = localStorage.getItem('cart');
-    return cartData ? JSON.parse(cartData) : [];
 }
 
 document.addEventListener('DOMContentLoaded', loadProductDetail);
