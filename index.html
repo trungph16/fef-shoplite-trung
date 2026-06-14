@@ -11,8 +11,8 @@
         <nav>
             <a href="index.html" class="logo">ShopLite</a>
             <button class="hamburger" id="hamburger-btn">
-                <img class="menu-icon" src="assets/icons/menu-bar.png" alt="Menu">
-                <img class="close-icon" src="assets/icons/cross.png" alt="Close">
+                <img class="menu-icon" src="assets/icons/menu.png" alt="Menu">
+                <img class="close-icon" src="assets/icons/close.png" alt="Close">
             </button>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html">Home</a></li>
@@ -26,10 +26,14 @@
     <main>
         <h1>Welcome to ShopLite</h1>
         <p>Discover our amazing collection of products.</p>
-        <div id="loading-indicator" style="display: none; padding: 2rem; text-align: center; font-size: 1.1rem; color: #2c3e50;">
-            Đang tải dữ liệu...
+        <div class="category-section">
+            <h3>Danh mục</h3>
+            <div id="category-filter" class="category-filter"></div>
         </div>
         <div id="products-container" class="products-grid"></div>
+                <div id="loading-indicator" style="display: none; padding: 2rem; text-align: center; font-size: 1.1rem; color: #2c3e50;">
+            Đang tải dữ liệu...
+        </div>
     </main>
 
     <footer>

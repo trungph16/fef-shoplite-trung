@@ -11,8 +11,8 @@
         <nav>
             <a href="index.html" class="logo">ShopLite</a>
             <button class="hamburger" id="hamburger-btn">
-                <img class="menu-icon" src="assets/icons/menu.png" alt="Menu">
-                <img class="close-icon" src="assets/icons/close.png" alt="Close">
+                <img class="menu-icon" src="assets/icons/menu-bar.png" alt="Menu">
+                <img class="close-icon" src="assets/icons/cross.png" alt="Close">
             </button>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html">Home</a></li>
@@ -26,20 +26,22 @@
     <main>
         <h1>Shopping Cart</h1>
         <section class="cart-content">
-            <table border="1" cellpadding="10" cellspacing="0" style="width: 100%;">
-                <thead>
-                    <tr>
-                        <th>Sản phẩm</th>
-                        <th>Giá</th>
-                        <th>Số lượng</th>
-                        <th>Tổng</th>
-                        <th>Hành động</th>
-                    </tr>
-                </thead>
-                <tbody id="cart-items">
-                    <tr><td colspan="5" style="text-align: center; padding: 2rem;">Đang tải giỏ hàng...</td></tr>
-                </tbody>
-            </table>
+            <div class="table-wrapper">
+                <table border="1" cellpadding="10" cellspacing="0" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items">
+                        <tr><td colspan="5" style="text-align: center; padding: 2rem;">Đang tải giỏ hàng...</td></tr>
+                    </tbody>
+                </table>
+            </div>
             <h2>Tổng tiền: <span id="cart-total">$0.00</span></h2>
             <a href="product.html"><button>Tiếp tục mua sắm</button></a>
             <button onclick="checkout()">Thanh toán</button>

@@ -98,6 +98,15 @@ nav a:hover {
   display: flex;
 }
 
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-wrapper table {
+    min-width: 600px;
+}
+
 /* Main Content */
 main {
   flex: 1;
@@ -300,7 +309,7 @@ button:hover {
 }
 
 .product-category {
-  padding: 0;
+  padding: 0rem 1rem;
   font-size: 0.9rem;
   color: #7f8c8d;
   text-transform: uppercase;
@@ -374,6 +383,50 @@ button:hover {
 
 .btn-delete:hover {
   background-color: #c0392b;
+}
+
+/* Category Filter */
+.category-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.category-section h3 {
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.category-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #ecf0f1;
+  color: #2c3e50;
+  border: 2px solid #bdc3c7;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.category-btn:hover {
+  background-color: #d5dbdb;
+  border-color: #95a5a6;
+}
+
+.category-btn.active {
+  background-color: #3498db;
+  color: white;
+  border-color: #3498db;
 }
 
 /* Cart Page Styling */
@@ -534,6 +587,15 @@ button:hover {
     gap: 1rem;
   }
 
+  .category-filter {
+    gap: 0.75rem;
+  }
+
+  .category-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
   .product-image {
     height: 150px;
   }
@@ -541,6 +603,10 @@ button:hover {
   .product-title {
     font-size: 0.9rem;
     padding: 0.75rem 0.75rem 0.25rem;
+  }
+
+  .product-category {
+    padding: 0 0.75rem;
   }
 
   .product-price {

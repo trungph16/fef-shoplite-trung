@@ -1,3 +1,5 @@
+let allProducts = [];
+
 async function loadProducts() {
     const loadingIndicator = document.getElementById('loading-indicator');
     const container = document.getElementById('products-container');
@@ -15,6 +17,7 @@ async function loadProducts() {
         }
 
         const products = await res.json();
+        allProducts = products;
         displayProducts(products);
         loadingIndicator.style.display = 'none';
     } catch (error) {
@@ -22,6 +25,77 @@ async function loadProducts() {
         loadingIndicator.textContent = 'Lỗi kết nối máy chủ, vui lòng thử lại sau.';
         loadingIndicator.style.color = '#e74c3c';
     }
+}
+
+async function loadCategories() {
+    const categoryContainer = document.getElementById('category-filter');
+    const loadingIndicator = document.getElementById('loading-indicator');
+
+    try {
+        loadingIndicator.style.display = 'block';
+        loadingIndicator.textContent = 'Đang tải dữ liệu...';
+        loadingIndicator.style.color = '#2c3e50';
+
+        const res = await fetch(
+            'https://fakestoreapi.com/products/categories'
+        );
+
+        if (!res.ok) {
+            throw new Error(`Network error: ${res.status}`);
+        }
+
+        const categories = await res.json();
+
+        categoryContainer.innerHTML = '';
+
+        const allBtn = document.createElement('button');
+        allBtn.className = 'category-btn active';
+        allBtn.textContent = 'All Products';
+
+        allBtn.addEventListener('click', () => {
+            setActiveButton(allBtn);
+            displayProducts(allProducts);
+        });
+
+        categoryContainer.appendChild(allBtn);
+
+        categories.forEach(category => {
+            const btn = document.createElement('button');
+
+            btn.className = 'category-btn';
+            btn.textContent =
+                category.charAt(0).toUpperCase() + category.slice(1);
+
+            btn.addEventListener('click', () => {
+                filterByCategory(category);
+                setActiveButton(btn);
+            });
+
+            categoryContainer.appendChild(btn);
+        });
+
+        loadingIndicator.style.display = 'none';
+
+    } catch (error) {
+        console.error('Error loading categories:', error);
+        loadingIndicator.textContent = 'Lỗi kết nối máy chủ, vui lòng thử lại sau.';
+        loadingIndicator.style.color = '#e74c3c';
+    }
+}
+
+function filterByCategory(category) {
+    const filtered = allProducts.filter(
+        product => product.category === category
+    );
+
+    displayProducts(filtered);
+}
+
+function setActiveButton(activeBtn) {
+    document.querySelectorAll('.category-btn')
+        .forEach(btn => btn.classList.remove('active'));
+
+    activeBtn.classList.add('active');
 }
 
 function displayProducts(products) {
@@ -110,4 +184,7 @@ function getCart() {
     return cartData ? JSON.parse(cartData) : [];
 }
 
-document.addEventListener('DOMContentLoaded', loadProducts);
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadCategories();
+    await loadProducts();
+});
